@@ -1,6 +1,6 @@
 {
   "name": "@pi-desktop/desktop",
-  "version": "0.24.0-beta.1",
+  "version": "0.23.0",
   "desktopName": "pi-desktop.desktop",
   "private": true,
   "description": "PI-Desktop Electron application",
@@ -259,7 +259,15 @@
     },
     "deb": {
       "packageName": "pi-desktop",
-      "artifactName": "pi-desktop_${version}_${arch}.${ext}"
+      "artifactName": "pi-desktop_${version}_${arch}.${ext}",
+      "depends": [
+        "libc6 (>= 2.31)",
+        "libgtk-3-0",
+        "libnss3",
+        "libasound2",
+        "libxss1",
+        "libxtst6"
+      ]
     },
     "rpm": {
       "packageName": "pi-desktop",

@@ -102,7 +102,7 @@ Subagent 与 Worker Session 可以承担独立任务并行工作。
 
 </div>
 
-> **当前发布线：0.24.x。**
+> **当前发布线：0.23.x。**
 
 ---
 
@@ -585,7 +585,7 @@ macOS Release 使用 Developer ID 签名并经过 Apple Notarization。
 
 <br />
 
-Linux 软件包（x64 与 arm64）需要 **glibc 2.35+**。
+Linux 软件包（x64 与 arm64）需要 **glibc 2.31+**（Ubuntu 20.04+、Debian 11+、银河麒麟 V10 SP1+、Fedora 36+）。
 
 常见支持版本：
 

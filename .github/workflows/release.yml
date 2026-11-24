@@ -113,9 +113,8 @@ jobs:
             platform: windows
             dist: dist:win
           - name: Linux x64
-            # Ubuntu 22.04 keeps host-core at glibc 2.35 so Ubuntu 22.04,
-            # Debian 12, and Fedora 36+ can load the binary. ubuntu-latest
-            # (24.04) would raise the floor to 2.39.
+            # Linux x64 builds keep host-core at glibc 2.31 (Ubuntu 20.04+,
+            # Debian 11+, and Fedora 36+).
             os: ubuntu-22.04
             arch: x64
             runner_arch: x86_64
@@ -125,9 +124,8 @@ jobs:
             dist: dist:linux
           - name: Linux arm64
             # GitHub's native arm64 runner packages the Electron app and the
-            # host-core sidecar at the same architecture; the `-arm` image
-            # keeps the glibc 2.35 floor the x64 lane documents
-            # (ubuntu-24.04-arm would raise it to 2.39).
+            # host-core sidecar at the same architecture; target glibc floor 2.31
+            # ensures compatibility with 银河麒麟 V10 SP1 (2403) ARM64.
             os: ubuntu-22.04-arm
             arch: arm64
             runner_arch: aarch64
@@ -467,8 +465,8 @@ jobs:
       - name: Build inputs (host-core, workspace, sidecar bundle)
         run: |
           set -euo pipefail
-          # Ubuntu 22.04 keeps the host-core glibc floor at 2.35, matching the
-          # desktop Linux build so the bundled binary loads on the same distros.
+          # Target glibc floor 2.31 matches the desktop Linux build so the bundled
+          # binary loads on Ubuntu 20.04+, Debian 11+, and 银河麒麟 V10 SP1+.
           cargo build --release --locked -p host-core &
           host_build_pid=$!
           trap 'kill "$host_build_pid" 2>/dev/null || true' EXIT

@@ -31,7 +31,8 @@ disagrees, so a green `check:release-docs` is a precondition, not a substitute.
 | `macos-codesign-shim.sh` | used by `macos-signing-watchdog.mjs` | PATH shim that timestamps every `codesign` invocation and then executes the real `codesign`; inert unless `PI_CODESIGN_LOG` is set |
 | `export-linux-asar.mjs` | `node scripts/export-linux-asar.mjs` | Copy the Linux `linux-unpacked/resources/app.asar` into the versioned release asset used for system-Electron repackaging |
 | `build-desktop-release.mjs` | called by the desktop `dist` / `dist:win` scripts | Build the native runner target without publishing; Windows runs separate NSIS and ZIP passes and stamps their updater distribution metadata |
-| `check-linux-host-glibc.mjs` | `node scripts/check-linux-host-glibc.mjs [bin]` | Fail a Linux host-core binary whose needed glibc is above 2.35 |
+| `build-linux-host-core.mjs` | `node scripts/build-linux-host-core.mjs [--arch arm64\|x64]` | Build host-core for Linux adhering to the glibc 2.31 floor (Kylin V10 SP1 / Ubuntu 20.04) |
+| `check-linux-host-glibc.mjs` | `node scripts/check-linux-host-glibc.mjs [bin]` | Fail a Linux host-core binary whose needed glibc is above 2.31 |
 | `make-icon.py` | `python3 scripts/make-icon.py` | Derive the package PNG, the macOS tray template, and the iconset/ICNS from the canonical PNG |
 | `publish-screenshots.py` | `python3 scripts/publish-screenshots.py` | Publish documentation screenshots |
 
@@ -122,7 +123,7 @@ repeats the `ci.yml` checks (a tag push does not trigger `ci.yml`), and the
 build matrix waits for it. Each platform runner then
 validates the tag against `apps/desktop/package.json` before packaging, then
 runs the native `dist:mac`, `dist:win`, or `dist:linux` command. The Linux
-job uses Ubuntu 22.04 so host-core stays on glibc 2.35, then
+job keeps host-core on glibc 2.31 (for Ubuntu 20.04+, Debian 11+, and 银河麒麟 V10 SP1+), then
 `scripts/check-linux-host-glibc.mjs` refuses a binary that needs a newer
 glibc. Each Linux runner (native x64 and arm64) also exports the exact
 app.asar from its own unpacked tree as a versioned release asset; the macOS

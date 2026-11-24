@@ -646,9 +646,8 @@ Shell smoke on each native runner:
 - Linux deb/rpm and the Windows portable ZIP remain notify-and-link update
   modes. Packaged macOS, Windows NSIS, and Linux AppImage use in-app
   `electron-updater`.
-- Linux x64 and arm64 packages are built on Ubuntu 22.04 (native `ubuntu-22.04`
-  and `ubuntu-22.04-arm` runners), so host-core needs glibc 2.35 or newer
-  (Ubuntu 22.04, Debian 12, Fedora 36+). Each tag job runs
+- Linux x64 and arm64 packages keep host-core at glibc 2.31 or newer
+  (Ubuntu 20.04+, Debian 11+, 银河麒麟 V10 SP1+, Fedora 36+). Each tag job runs
   `scripts/check-linux-host-glibc.mjs` and refuses a binary that needs a
   newer glibc.
 - Linux arm64 microphone capture works on Raspberry Pi boards only:

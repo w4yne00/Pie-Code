@@ -37,7 +37,7 @@ Local-first · Model-agnostic · Plugin-powered · macOS / Windows / Linux
 
 </div>
 
-> **Current release line: 0.24.x.**
+> **Current release line: 0.23.x.**
 
 ---
 
@@ -584,7 +584,7 @@ macOS releases are signed with a Developer ID certificate and notarized by Apple
 
 <br />
 
-Linux packages require **glibc 2.35+**.
+Linux packages require **glibc 2.31+** (Ubuntu 20.04+, Debian 11+, 银河麒麟 V10 SP1+, Fedora 36+).
 
 Common supported distributions include:
 
